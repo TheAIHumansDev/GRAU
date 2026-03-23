@@ -1,5 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>G.RAU — RAUIA · Onboarding & Certification</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
+  <style>
+    :root {
+      --blue-deep:    #0a2540;
+      --blue-rich:    #1a4480;
+      --blue-mid:     #2563b0;
+      --blue-bright:  #3b82f6;
+      --blue-light:   #dbeafe;
+      --blue-pale:    #eff6ff;
+      --gold:         #c9972a;
+      --gold-light:   #fef3c7;
+      --white:        #ffffff;
+      --off-white:    #f8fafc;
+      --slate-50:     #f8fafc;
+      --slate-100:    #f1f5f9;
+      --slate-200:    #e2e8f0;
+      --slate-300:    #cbd5e1;
+      --slate-400:    #94a3b8;
+      --slate-500:    #64748b;
+      --slate-600:    #475569;
+      --slate-700:    #334155;
+      --slate-800:    #1e293b;
+      --shadow-sm:    0 1px 3px rgba(10,37,64,0.08), 0 1px 2px rgba(10,37,64,0.04);
+      --shadow-md:    0 4px 16px rgba(10,37,64,0.10), 0 2px 6px rgba(10,37,64,0.06);
+      --shadow-lg:    0 20px 48px rgba(10,37,64,0.14), 0 8px 16px rgba(10,37,64,0.08);
+      --shadow-xl:    0 32px 80px rgba(10,37,64,0.18);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--white);
+      color: var(--slate-800);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 400;
+      overflow-x: hidden;
+    }
+
+    /* ══════════════════════════════════
+       NAVIGATION
+    ══════════════════════════════════ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 52px;
+      height: 68px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(226,232,240,0.8);
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: var(--shadow-md); }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .brand-mark {
+      width: 36px; height: 36px;
+      background: var(--blue-deep);
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 6px;
+    }
+    .brand-mark svg { width: 18px; height: 18px; fill: white; }
+    .brand-wordmark {
+      display: flex; flex-direction: column; gap: 1px;
+    }
+    .brand-name {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700; font-size: 16px;
+      letter-spacing: 0.08em;
+      color: var(--blue-deep);
+    }
+    .brand-sub {
+      font-size: 9px; font-weight: 500;
+      letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--slate-400);
+    }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 32px;
+    }
+    .nav-links a {
+      font-size: 13px; font-weight: 500;
+      color: var(--slate-600);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--blue-rich); }
+
+    .nav-cta {
+      background: var(--blue-rich);
+      color: white !important;
+      padding: 9px 22px;
+      border-radius: 6px;
+      font-size: 13px !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.02em !important;
+      transition: background 0.2s, transform 0.15s !important;
+    }
+    .nav-cta:hover { background: var(--blue-deep) !important; transform: translateY(-1px); }
+
+    /* ══════════════════════════════════
+       HERO — VIDEO BACKGROUND
+    ══════════════════════════════════ */
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Video BG */
+    .hero-video-wrap {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .hero-video-wrap video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    /* Gradient overlay — preserves readability + brand feel */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(
+          to right,
+          rgba(10,37,64,0.82) 0%,
+          rgba(10,37,64,0.60) 50%,
+          rgba(10,37,64,0.30) 100%
+        ),
+        linear-gradient(
+          to top,
+          rgba(10,37,64,0.5) 0%,
+          transparent 40%
+        );
+    }
+
+    /* Subtle diagonal lines — industrial texture */
+    .hero-texture {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background-image: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 40px,
+        rgba(255,255,255,0.015) 40px,
+        rgba(255,255,255,0.015) 41px
+      );
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      max-width: 1100px;
+      width: 100%;
+      padding: 0 52px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(59,130,246,0.2);
+      border: 1px solid rgba(59,130,246,0.35);
+      color: #93c5fd;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+      animation: fadeUp 0.7s ease forwards;
+      opacity: 0;
+    }
+    .eyebrow-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #60a5fa;
+      animation: pulse-b 2s ease-in-out infinite;
+    }
+    @keyframes pulse-b { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+
+    .hero-h1 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: clamp(48px, 6vw, 80px);
+      line-height: 1.08;
+      color: white;
+      margin-bottom: 8px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.15s;
+    }
+    .hero-h1 em {
+      font-style: italic;
+      color: #93c5fd;
+    }
+
+    .hero-sub {
+      font-size: clamp(16px, 2vw, 22px);
+      font-weight: 300;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 40px;
+      letter-spacing: 0.01em;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.3s;
+    }
+
+    .hero-desc {
+      font-size: 15px;
+      line-height: 1.85;
+      color: rgba(255,255,255,0.55);
+      max-width: 480px;
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.45s;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.6s;
+    }
+
+    .btn-white {
+      background: white;
+      color: var(--blue-deep);
+      font-weight: 700;
+      font-size: 14px;
+      padding: 14px 32px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      letter-spacing: 0.01em;
+    }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+
+    .btn-outline-w {
+      background: transparent;
+      color: rgba(255,255,255,0.85);
+      font-weight: 500;
+      font-size: 14px;
+      padding: 14px 28px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.25);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-outline-w:hover { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.08); }
+
+    /* Scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.35);
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      animation: fadeUp 1s ease forwards 1.2s;
+      opacity: 0;
+    }
+    .scroll-arrow {
+      width: 20px; height: 20px;
+      border-right: 1px solid rgba(255,255,255,0.25);
+      border-bottom: 1px solid rgba(255,255,255,0.25);
+      transform: rotate(45deg);
+      animation: bounce-arrow 1.8s ease-in-out infinite;
+    }
+    @keyframes bounce-arrow {
+      0%,100%{ transform: rotate(45deg) translateY(0); }
+      50%{ transform: rotate(45deg) translateY(5px); }
+    }
+
+    /* ══════════════════════════════════
+       TRUST STRIP
+    ══════════════════════════════════ */
+    .trust-strip {
+      background: var(--white);
+      border-bottom: 1px solid var(--slate-200);
+      padding: 24px 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 52px;
+    }
+    .trust-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--slate-400);
+      white-space: nowrap;
+    }
+    .trust-items {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--slate-500);
+    }
+    .trust-item span { font-size: 16px; }
+
+    /* ══════════════════════════════════
+       METAHUMAN SECTION
+    ══════════════════════════════════ */
+    .advisor-section {
+      background: var(--slate-50);
+      padding: 96px 52px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .advisor-inner {
+      max-width: 1100px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 520px;
+      gap: 72px;
+      align-items: center;
+    }
+
+    .advisor-copy {}
+
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--blue-mid);
+      margin-bottom: 20px;
+    }
+    .section-eyebrow::before {
+      content: '';
+      width: 28px; height: 2px;
+      background: var(--blue-bright);
+      border-radius: 2px;
+    }
+
+    .advisor-h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: clamp(32px, 3.5vw, 52px);
+      line-height: 1.12;
+      color: var(--blue-deep);
+      margin-bottom: 20px;
+    }
+    .advisor-h2 em { font-style: italic; color: var(--blue-mid); }
+
+    .advisor-desc {
+      font-size: 15px;
+      line-height: 1.9;
+      color: var(--slate-500);
+      margin-bottom: 36px;
+      max-width: 420px;
+    }
+
+    /* Capability pills */
+    .cap-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 44px;
+    }
+    .cap-pill {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--white);
+      border: 1px solid var(--slate-200);
+      border-radius: 100px;
+      padding: 7px 16px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--slate-600);
+      box-shadow: var(--shadow-sm);
+    }
+    .cap-pill span { font-size: 14px; }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--blue-rich);
+      color: white;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 14px 32px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 14px rgba(26,68,128,0.3);
+    }
+    .btn-primary:hover {
+      background: var(--blue-deep);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(26,68,128,0.35);
+    }
+    .btn-arrow { font-size: 16px; transition: transform 0.2s; }
+    .btn-primary:hover .btn-arrow { transform: translateX(4px); }
+
+    /* Metahuman card */
+    .mh-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-xl);
+      border: 1px solid var(--slate-200);
+      position: relative;
+    }
+
+    .mh-card-header {
+      background: var(--blue-deep);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .mh-dots { display: flex; gap: 6px; }
+    .mh-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+    }
+    .mh-dot:nth-child(1) { background: #ff5f57; }
+    .mh-dot:nth-child(2) { background: #febc2e; }
+    .mh-dot:nth-child(3) { background: #28c840; }
+
+    .mh-card-title {
+      flex: 1;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.6);
+      text-transform: uppercase;
+    }
+    .mh-live {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #4ade80;
+    }
+    .mh-live-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #4ade80;
+      animation: pulse-g 1.8s ease-in-out infinite;
+    }
+    @keyframes pulse-g { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+    .mh-viewport {
+      aspect-ratio: 9/12;
+      background: linear-gradient(160deg, #e8f0fe 0%, #c7d9f8 50%, #dbeafe 100%);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Subtle concentric rings */
+    .mh-rings {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .mh-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(37,99,176,0.1);
+    }
+    .mh-ring:nth-child(1) { width: 200px; height: 200px; }
+    .mh-ring:nth-child(2) { width: 320px; height: 320px; animation: ring-pulse 4s ease-in-out infinite; }
+    .mh-ring:nth-child(3) { width: 440px; height: 440px; animation: ring-pulse 4s ease-in-out infinite 1s; }
+    @keyframes ring-pulse {
+      0%,100%{ opacity: 0.6; transform: scale(1); }
+      50%{ opacity: 0.2; transform: scale(1.04); }
+    }
+
+    /* ── PLACEHOLDER — swap for <iframe> ── */
+    .mh-placeholder {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+    }
+    .mh-avatar-ring {
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      background: white;
+      box-shadow: 0 8px 32px rgba(26,68,128,0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 44px;
+      animation: float 3.5s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%,100%{ transform: translateY(0); }
+      50%{ transform: translateY(-10px); }
+    }
+    .mh-ph-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--blue-deep);
+    }
+    .mh-ph-role {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--blue-mid);
+    }
+    .mh-ph-hint {
+      font-size: 11px;
+      color: var(--slate-400);
+      letter-spacing: 0.05em;
+      font-family: monospace;
+    }
+
+    /* real iframe */
+    .mh-iframe {
+      width: 100%; height: 100%;
+      border: none; display: block;
+      position: absolute; inset: 0;
+    }
+
+    /* bottom badge */
+    .mh-card-footer {
+      background: var(--slate-50);
+      border-top: 1px solid var(--slate-200);
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .mh-badge {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--slate-500);
+    }
+    .mh-badge-icon { font-size: 14px; }
+    .mh-model-tag {
+      background: var(--blue-pale);
+      color: var(--blue-rich);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 100px;
+      border: 1px solid var(--blue-light);
+    }
+
+    /* ══════════════════════════════════
+       USE CASES — 2 cards
+    ══════════════════════════════════ */
+    .use-section {
+      background: white;
+      padding: 96px 52px;
+      display: flex;
+      justify-content: center;
+    }
+    .use-inner {
+      max-width: 1100px;
+      width: 100%;
+    }
+    .use-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .use-h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 3vw, 44px);
+      font-weight: 700;
+      color: var(--blue-deep);
+      margin-bottom: 14px;
+    }
+    .use-h2 em { font-style: italic; color: var(--blue-mid); }
+    .use-sub {
+      font-size: 15px;
+      color: var(--slate-400);
+      max-width: 460px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .use-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+
+    .use-card {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: 14px;
+      padding: 40px 40px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .use-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+    .use-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+    .use-card.onboarding::before { background: linear-gradient(90deg, var(--blue-bright), var(--blue-mid)); }
+    .use-card.certification::before { background: linear-gradient(90deg, var(--gold), #f59e0b); }
+
+    .use-card-icon {
+      width: 52px; height: 52px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+      margin-bottom: 24px;
+    }
+    .use-card.onboarding .use-card-icon { background: var(--blue-pale); }
+    .use-card.certification .use-card-icon { background: var(--gold-light); }
+
+    .use-card-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--blue-deep);
+      margin-bottom: 12px;
+    }
+    .use-card-desc {
+      font-size: 14px;
+      line-height: 1.85;
+      color: var(--slate-500);
+      margin-bottom: 28px;
+    }
+
+    .use-features {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .use-feature {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--slate-600);
+    }
+    .use-check {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px;
+      flex-shrink: 0;
+    }
+    .use-card.onboarding .use-check { background: var(--blue-pale); color: var(--blue-rich); }
+    .use-card.certification .use-check { background: var(--gold-light); color: var(--gold); }
+
+    /* ══════════════════════════════════
+       CTA BANNER
+    ══════════════════════════════════ */
+    .cta-section {
+      background: var(--blue-deep);
+      padding: 80px 52px;
+      display: flex;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: -120px; right: -120px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(59,130,246,0.15) 0%, transparent 70%);
+    }
+    .cta-section::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -80px;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(59,130,246,0.1) 0%, transparent 70%);
+    }
+    .cta-inner {
+      max-width: 640px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+    .cta-h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 3.5vw, 46px);
+      font-weight: 700;
+      color: white;
+      margin-bottom: 16px;
+      line-height: 1.15;
+    }
+    .cta-h2 em { font-style: italic; color: #93c5fd; }
+    .cta-desc {
+      font-size: 15px;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 40px;
+    }
+    .cta-actions { display: flex; gap: 14px; justify-content: center; }
+
+    /* ══════════════════════════════════
+       FOOTER
+    ══════════════════════════════════ */
+    footer {
+      background: var(--slate-800);
+      padding: 32px 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .footer-mark {
+      width: 28px; height: 28px;
+      background: var(--blue-rich);
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .footer-mark svg { width: 14px; height: 14px; fill: white; }
+    .footer-name {
+      font-weight: 700; font-size: 14px;
+      letter-spacing: 0.08em;
+      color: white;
+    }
+    .footer-copy {
+      font-size: 12px;
+      color: var(--slate-500);
+      letter-spacing: 0.05em;
+    }
+    .footer-links {
+      display: flex; gap: 24px;
+    }
+    .footer-links a {
+      font-size: 12px;
+      color: var(--slate-500);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: white; }
+
+    /* ══════════════════════════════════
+       ANIMATIONS
+    ══════════════════════════════════ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ══════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════ */
+    @media (max-width: 960px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .hero-content { padding: 0 28px; }
+      .trust-strip { flex-direction: column; gap: 20px; padding: 24px 28px; }
+      .trust-items { flex-wrap: wrap; gap: 20px; justify-content: center; }
+      .advisor-section { padding: 64px 28px; }
+      .advisor-inner { grid-template-columns: 1fr; gap: 48px; }
+      .use-section { padding: 64px 28px; }
+      .use-grid { grid-template-columns: 1fr; }
+      .cta-section { padding: 64px 28px; }
+      .cta-actions { flex-direction: column; align-items: center; }
+      footer { flex-direction: column; gap: 16px; padding: 28px 24px; text-align: center; }
+      .footer-links { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+
+
+  
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="#" class="nav-brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <div class="brand-wordmark">
+        <span class="brand-name">G·RAU</span>
+        <span class="brand-sub">Precision Metal</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="#advisor">Meet RAUIA</a>
+      <a href="#uses">Capabilities</a>
+      <a href="#cta" class="nav-cta">Start Training</a>
+    </div>
+  </nav>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+
+    <!-- VIDEO BACKGROUND -->
+    <div class="hero-video-wrap">
+      <!--
+        Replace the <video> below with your own footage.
+        Best results: slow-motion metal manufacturing / industrial footage.
+        Suggested free sources: Pexels.com · Coverr.co · Pixabay.com
+        Search: "metal manufacturing" "steel factory" "industrial precision"
+      -->
+      <video autoplay muted loop playsinline poster="">
+        <!-- <source src="your-video.mp4" type="video/mp4"> -->
+        <!-- Fallback gradient shown when no video source is set -->
+      </video>
+    </div>
+
+    <!-- Fallback gradient (visible until video loads) -->
+    <div style="position:absolute;inset:0;z-index:0;background:linear-gradient(135deg,#0a2540 0%,#1a4480 40%,#0f3460 100%);"></div>
+
+    <div class="hero-overlay"></div>
+    <div class="hero-texture"></div>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span class="eyebrow-dot"></span>
+        AI-Powered Training
+      </div>
+
+      <h1 class="hero-h1">
+        Meet <em>RAUIA</em><br>Your Onboarding<br>&amp; Certification<br>Advisor
+      </h1>
+
+      <p class="hero-sub">Powered by G.RAU's century of metals expertise</p>
+
+      <p class="hero-desc">
+        RAUIA is G.RAU's intelligent metahuman — always available to guide new employees through onboarding and help your team earn certifications in our precision metal technologies.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#advisor" class="btn-white">
+          Talk to RAUIA
+          <span>→</span>
+        </a>
+        <a href="#uses" class="btn-outline-w">
+          See Capabilities
+        </a>
+      </div>
+    </div>
+
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- TRUST STRIP -->
+  <div class="trust-strip">
+    <span class="trust-label">Trusted for</span>
+    <div class="trust-items">
+      <div class="trust-item"><span>🛡</span> Employee Onboarding</div>
+      <div class="trust-item"><span>🏆</span> Technology Certifications</div>
+      <div class="trust-item"><span>🔬</span> Metals Knowledge Base</div>
+      <div class="trust-item"><span>⚡</span> 24/7 Availability</div>
+      <div class="trust-item"><span>🌐</span> Multilingual Support</div>
+    </div>
+  </div>
+
+  <!-- ═══ METAHUMAN ═══ -->
+  <section class="advisor-section" id="advisor">
+    <div class="advisor-inner">
+
+      <div class="advisor-copy reveal">
+        <div class="section-eyebrow">Your AI Trainer</div>
+        <h2 class="advisor-h2">
+          <em>RAUIA</em> knows<br>G.RAU inside out
+        </h2>
+        <p class="advisor-desc">
+          Ask anything — from your first day on the job to preparing for an advanced certification exam. RAUIA speaks your language and adapts to your pace.
+        </p>
+
+        <div class="cap-list">
+          <div class="cap-pill"><span>👋</span> Onboarding Guidance</div>
+          <div class="cap-pill"><span>📋</span> Certification Prep</div>
+          <div class="cap-pill"><span>🔩</span> Metals Knowledge</div>
+          <div class="cap-pill"><span>🧪</span> Practice Quizzes</div>
+          <div class="cap-pill"><span>📄</span> Document Assistance</div>
+          <div class="cap-pill"><span>🌍</span> Multilingual</div>
+        </div>
+
+        <a href="#cta" class="btn-primary">
+          Begin Your Session
+          <span class="btn-arrow">→</span>
+        </a>
+      </div>
+
+      <!-- METAHUMAN CARD -->
+      <div class="mh-card reveal" style="transition-delay:0.15s;">
+        <div class="mh-card-header">
+          <div class="mh-dots">
+            <div class="mh-dot"></div>
+            <div class="mh-dot"></div>
+            <div class="mh-dot"></div>
+          </div>
+          <div class="mh-card-title">RAUIA — G.RAU AI Advisor</div>
+          <div class="mh-live">
+            <div class="mh-live-dot"></div>
+            Live
+          </div>
+        </div>
+
+        <div class="mh-viewport">
+          <div class="mh-rings">
+            <div class="mh-ring"></div>
+            <div class="mh-ring"></div>
+            <div class="mh-ring"></div>
+          </div>
   <script
    src="https://static.soulmachines.com/widget-snippet-1.12.0.min.js"
    data-sm-api-key="eyJzb3VsSWQiOiJkZG5hLWd1YWRhbC1nZGwtb3JnLS1leHBsb3Jlci1hODNiZTAyIiwiYXV0aFNlcnZlciI6Imh0dHBzOi8vZGguc291bG1hY2hpbmVzLmNsb3VkL2FwaS9qd3QiLCJhdXRoVG9rZW4iOiJhcGlrZXlfdjFfMjgxODBjNjYtMGRhNy00M2Q1LTkzYTYtMzhhODEyZjdjMjFmIn0="
   ></script>
+
+
+          <!-- PLACEHOLDER -->
+          <div class="mh-placeholder">
+            <div class="mh-avatar-ring">🤖</div>
+            <div class="mh-ph-name">RAUIA</div>
+            <div class="mh-ph-role">G.RAU Intelligent Advisor</div>
+            <div class="mh-ph-hint">&lt;!-- paste iframe here --&gt;</div>
+          </div>
+
+        </div>
+
+        <div class="mh-card-footer">
+          <div class="mh-badge">
+            <span class="mh-badge-icon">🔒</span>
+            Secure · Private session
+          </div>
+          <div class="mh-model-tag">G.RAU AI v2</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ USE CASES ═══ -->
+  <section class="use-section" id="uses">
+    <div class="use-inner">
+      <div class="use-header reveal">
+        <h2 class="use-h2">Two <em>powerful</em> use cases</h2>
+        <p class="use-sub">Whether you're a new hire or a seasoned professional seeking certification, RAUIA is built for you.</p>
+      </div>
+      <div class="use-grid">
+
+        <div class="use-card onboarding reveal">
+          <div class="use-card-icon">👋</div>
+          <h3 class="use-card-title">Employee Onboarding</h3>
+          <p class="use-card-desc">
+            RAUIA walks new employees through everything they need to know on day one — company culture, processes, safety protocols, and G.RAU's world of metals — in a conversational, human-like format.
+          </p>
+          <div class="use-features">
+            <div class="use-feature">
+              <div class="use-check">✓</div>
+              Personalized welcome experience
+            </div>
+            <div class="use-feature">
+              <div class="use-check">✓</div>
+              Safety &amp; compliance training
+            </div>
+            <div class="use-feature">
+              <div class="use-check">✓</div>
+              Role-specific guidance
+            </div>
+            <div class="use-feature">
+              <div class="use-check">✓</div>
+              Q&amp;A on policies and procedures
+            </div>
+          </div>
+        </div>
+
+        <div class="use-card certification reveal" style="transition-delay:0.15s;">
+          <div class="use-card-icon">🏆</div>
+          <h3 class="use-card-title">Technology Certification</h3>
+          <p class="use-card-desc">
+            Help your team get certified in G.RAU technologies. RAUIA teaches, quizzes, and prepares employees for certification exams through adaptive, conversational learning.
+          </p>
+          <div class="use-features">
+            <div class="use-feature">
+              <div class="use-check">✓</div>
+              Alloy &amp; materials deep-dives
+            </div>
+            <div class="use-feature">
+              <div class="use-check">✓</div>
+              Interactive practice quizzes
+            </div>
+            <div class="use-feature">
+              <div class="use-check">✓</div>
+              Mock certification exams
+            </div>
+            <div class="use-feature">
+              <div class="use-check">✓</div>
+              Progress tracking &amp; scoring
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CTA ═══ -->
+  <section class="cta-section" id="cta">
+    <div class="cta-inner reveal">
+      <h2 class="cta-h2">Ready to meet <em>RAUIA</em>?</h2>
+      <p class="cta-desc">Start your onboarding session or begin certification preparation. RAUIA is online and ready for you right now.</p>
+      <div class="cta-actions">
+        <a href="#advisor" class="btn-white">
+          Talk to RAUIA Now →
+        </a>
+        <a href="#uses" class="btn-outline-w">
+          Learn More
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">
+      <div class="footer-mark">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <span class="footer-name">G·RAU Precision Metal</span>
+    </div>
+    <div class="footer-copy">© 2025 G.RAU. All rights reserved.</div>
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <a href="#">Legal</a>
+      <a href="#">Contact</a>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
